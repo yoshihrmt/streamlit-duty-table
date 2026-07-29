@@ -8,7 +8,7 @@ import streamlit as st
 
 APP_TITLE = "外線対応 共有ボード"
 DATA_FILE = Path("availability_data.json")
-DEFAULT_MEMBERS = ["平松", "滝", "西尾"]
+DEFAULT_MEMBERS = []
 START_HOUR = 8
 END_HOUR = 18
 SLOT_MINUTES = 30
