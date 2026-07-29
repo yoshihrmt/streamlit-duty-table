@@ -355,4 +355,5 @@ if st.button("全日程をJSONへ保存", type="primary"):
     st.success("保存しました。")
     st.rerun()
 
-st.caption("データ保存先：availability_data.json（この app_aggrid_fast_fixed3.py と同じフォルダ）")
+st.caption("データ保存先：GitHub上の availability_data.json")
+
