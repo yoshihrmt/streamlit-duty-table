@@ -8,6 +8,11 @@ import pandas as pd
 import streamlit as st
 from zoneinfo import ZoneInfo
 
+def today_jst():
+    return datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    ).date()
+
 APP_TITLE = "外線対応 共有ボード"
 DATA_FILE = Path("availability_data.json")
 DEFAULT_MEMBERS = []
@@ -35,11 +40,15 @@ except Exception as e:
 
 def make_time_slots(start_hour=8, end_hour=18, step_minutes=30):
     slots = []
-    dt = datetime.combine(date.today(), time(start_hour, 0))
-    end = datetime.combine(date.today(), time(end_hour, 0))
+    today = today_jst()
+
+    dt = datetime.combine(today, time(start_hour, 0))
+    end = datetime.combine(today, time(end_hour, 0))
+
     while dt < end:
         slots.append(dt.strftime("%H:%M"))
         dt += timedelta(minutes=step_minutes)
+
     return slots
 
 
@@ -164,7 +173,9 @@ def save_data(data):
         st.code(str(e))
 
 def cleanup_old_data(data):
-    today = date.today()
+    today = datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    ).date()
 
     keys_to_delete = []
 
@@ -331,7 +342,7 @@ if "grid_version" not in st.session_state:
     st.session_state.grid_version = 0
 
 data = st.session_state.data
-actual_today = date.today()
+actual_today = today_jst()
 if st.session_state.get("_actual_today") != actual_today:
     st.session_state["_actual_today"] = actual_today
     st.session_state["start_day"] = actual_today
