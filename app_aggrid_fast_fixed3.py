@@ -191,7 +191,7 @@ def render_grid_for_day(data, d, members, slots, grid_version):
     cell_renderer = make_cell_renderer()
     action_renderer = make_action_renderer()
     for s in slots:
-        gb.configure_column(s, width=56, editable=False, cellRenderer=cell_renderer, cellStyle={"padding": "0px"})
+        gb.configure_column(s, width=80, editable=False, cellRenderer=cell_renderer, cellStyle={"padding": "0px"})
     for c in ["午前", "午後", "終日", "消去"]:
         gb.configure_column(c, width=78, pinned="right", editable=False, cellRenderer=action_renderer)
     grid_options = gb.build()
@@ -239,7 +239,6 @@ if st.session_state.get("_actual_today") != actual_today:
 slots = make_time_slots(START_HOUR, END_HOUR, SLOT_MINUTES)
 
 st.title(APP_TITLE)
-st.caption("AgGrid版：セルクリックはブラウザ内で即時反映。保存時だけJSONへ反映します。")
 
 with st.sidebar:
     st.header("設定")
@@ -264,7 +263,7 @@ with st.sidebar:
 members = data.get("members", DEFAULT_MEMBERS)
 workdays = get_workdays(start_day, WORKDAY_COUNT)
 
-st.info("午前OKは12:15まで（30分単位のため12:00開始セルまで）、午後OKは13:00以降です。12:30セルは午前/午後の一括対象外です。セルを編集したら最後に保存してください。")
+st.info("セルを編集したら最後に保存してください。")
 
 updated_by_day = {}
 for d in workdays:
