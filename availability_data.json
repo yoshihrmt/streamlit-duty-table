@@ -1,6 +1,6 @@
 {
   "members": [
-    "H.Y"
+    "H.Y."
   ],
   "availability": {
     "2026-07-29": {
@@ -71,6 +71,28 @@
         "17:30": false
       },
       "H.Y.": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
+      },
+      "H.Y": {
         "08:00": false,
         "08:30": false,
         "09:00": false,
@@ -181,6 +203,28 @@
         "16:30": true,
         "17:00": true,
         "17:30": true
+      },
+      "H.Y": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
       }
     },
     "2026-07-31": {
@@ -251,6 +295,28 @@
         "17:30": false
       },
       "H.Y.": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
+      },
+      "H.Y": {
         "08:00": false,
         "08:30": false,
         "09:00": false,
@@ -361,6 +427,28 @@
         "16:30": false,
         "17:00": false,
         "17:30": false
+      },
+      "H.Y": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
       }
     },
     "2026-08-04": {
@@ -451,6 +539,28 @@
         "16:30": false,
         "17:00": false,
         "17:30": false
+      },
+      "H.Y": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
       }
     },
     "2026-08-05": {
@@ -521,6 +631,28 @@
         "17:30": false
       },
       "H.Y.": {
+        "08:00": false,
+        "08:30": false,
+        "09:00": false,
+        "09:30": false,
+        "10:00": false,
+        "10:30": false,
+        "11:00": false,
+        "11:30": false,
+        "12:00": false,
+        "12:30": false,
+        "13:00": false,
+        "13:30": false,
+        "14:00": false,
+        "14:30": false,
+        "15:00": false,
+        "15:30": false,
+        "16:00": false,
+        "16:30": false,
+        "17:00": false,
+        "17:30": false
+      },
+      "H.Y": {
         "08:00": false,
         "08:30": false,
         "09:00": false,
