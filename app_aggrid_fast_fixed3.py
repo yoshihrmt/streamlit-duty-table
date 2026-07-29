@@ -6,6 +6,7 @@ import requests
 import base64
 import pandas as pd
 import streamlit as st
+from zoneinfo import ZoneInfo
 
 APP_TITLE = "外線対応 共有ボード"
 DATA_FILE = Path("availability_data.json")
@@ -339,7 +340,11 @@ slots = make_time_slots(START_HOUR, END_HOUR, SLOT_MINUTES)
 
 st.title(APP_TITLE)
 
-st.write(datetime.now())
+st.write(
+    datetime.now(
+        ZoneInfo("Asia/Tokyo")
+    )
+)
 
 with st.sidebar:
     st.header("設定")
