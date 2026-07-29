@@ -362,7 +362,7 @@ with st.sidebar:
 members = data.get("members", DEFAULT_MEMBERS)
 workdays = get_workdays(start_day, WORKDAY_COUNT)
 
-st.info("セルを編集したら最後に保存してください。")
+st.info("日時が見ずらい場合は、モニターに移動させてリロードしてください。セルを編集したら最後に保存してください。")
 
 updated_by_day = {}
 for d in workdays:
