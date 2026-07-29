@@ -339,7 +339,7 @@ slots = make_time_slots(START_HOUR, END_HOUR, SLOT_MINUTES)
 
 st.title(APP_TITLE)
 
-st.write(date.today())
+st.write(datetime.now())
 
 with st.sidebar:
     st.header("設定")
