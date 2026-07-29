@@ -108,6 +108,9 @@ def load_data():
         data = json.loads(raw)
         data.setdefault("members", DEFAULT_MEMBERS)
         data.setdefault("availability", {})
+        
+        data = cleanup_old_data(data)
+        
         return data
 
     except Exception as e:
@@ -158,6 +161,24 @@ def save_data(data):
     except Exception as e:
         st.error("GitHubへデータを保存できませんでした。")
         st.code(str(e))
+
+def cleanup_old_data(data):
+    today = date.today()
+
+    keys_to_delete = []
+
+    for dk in data.get("availability", {}):
+        try:
+            d = date.fromisoformat(dk)
+            if d < today:
+                keys_to_delete.append(dk)
+        except Exception:
+            pass
+
+    for dk in keys_to_delete:
+        del data["availability"][dk]
+
+    return data
 
 def ensure_day_member(data, d: date, member: str, slots):
     dk = date_key(d)
