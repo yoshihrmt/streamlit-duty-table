@@ -2,7 +2,8 @@ import json
 import hashlib
 from pathlib import Path
 from datetime import date, datetime, timedelta, time
-
+import requests
+import base64
 import pandas as pd
 import streamlit as st
 
@@ -62,24 +63,101 @@ def jp_weekday(d: date):
 def date_label(d: date):
     return f"{d.month}/{d.day}({jp_weekday(d)})"
 
+def github_headers():
+    return {
+        "Authorization": f"Bearer {st.secrets['GITHUB_TOKEN']}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+
+def github_file_api_url():
+    owner = st.secrets["GITHUB_OWNER"]
+    repo = st.secrets["GITHUB_REPO"]
+    path = st.secrets.get("GITHUB_DATA_FILE", "availability_data.json")
+    return f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
+
+
+def empty_data():
+    return {"members": DEFAULT_MEMBERS, "availability": {}}
+
 
 def load_data():
-    if not DATA_FILE.exists():
-        return {"members": DEFAULT_MEMBERS, "availability": {}}
     try:
-        with DATA_FILE.open("r", encoding="utf-8") as f:
-            data = json.load(f)
+        url = github_file_api_url()
+        branch = st.secrets.get("GITHUB_BRANCH", "main")
+
+        r = requests.get(
+            url,
+            headers=github_headers(),
+            params={"ref": branch},
+            timeout=10,
+        )
+
+        if r.status_code == 404:
+            return empty_data()
+
+        r.raise_for_status()
+
+        content = r.json().get("content", "")
+        raw = base64.b64decode(content).decode("utf-8")
+
+        if not raw.strip():
+            return empty_data()
+
+        data = json.loads(raw)
         data.setdefault("members", DEFAULT_MEMBERS)
         data.setdefault("availability", {})
         return data
-    except Exception:
-        return {"members": DEFAULT_MEMBERS, "availability": {}}
+
+    except Exception as e:
+        st.error("GitHubからデータを読み込めませんでした。")
+        st.code(str(e))
+        return empty_data()
 
 
 def save_data(data):
-    with DATA_FILE.open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    try:
+        url = github_file_api_url()
+        branch = st.secrets.get("GITHUB_BRANCH", "main")
 
+        # GitHub上の現在のファイル情報を取得する
+        r = requests.get(
+            url,
+            headers=github_headers(),
+            params={"ref": branch},
+            timeout=10,
+        )
+
+        sha = None
+        if r.status_code == 200:
+            sha = r.json().get("sha")
+        elif r.status_code != 404:
+            r.raise_for_status()
+
+        json_text = json.dumps(data, ensure_ascii=False, indent=2)
+        encoded = base64.b64encode(json_text.encode("utf-8")).decode("utf-8")
+
+        payload = {
+            "message": "Update availability data from Streamlit app",
+            "content": encoded,
+            "branch": branch,
+        }
+
+        if sha:
+            payload["sha"] = sha
+
+        res = requests.put(
+            url,
+            headers=github_headers(),
+            json=payload,
+            timeout=10,
+        )
+        res.raise_for_status()
+
+    except Exception as e:
+        st.error("GitHubへデータを保存できませんでした。")
+        st.code(str(e))
 
 def ensure_day_member(data, d: date, member: str, slots):
     dk = date_key(d)
